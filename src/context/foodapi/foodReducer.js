@@ -5,7 +5,7 @@ import {
   GET_RECIPE,
 } from "../types";
 
-const FoodReducer = (state, action) => {
+const foodReducer = (state, action) => {
   switch (action.type) {
     case SEARCH_RECIPES:
       return {
@@ -19,6 +19,12 @@ const FoodReducer = (state, action) => {
         recipe: action.payload,
         loading: false,
       };
+    case CLEAR_RECIPES:
+      return {
+        ...state,
+        recipes: [],
+        loading: false,
+      };
     case SET_LOADING:
       return {
         ...state,
@@ -29,4 +35,4 @@ const FoodReducer = (state, action) => {
   }
 };
 
-export default FoodReducer;
+export default foodReducer;

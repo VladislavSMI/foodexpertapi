@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useContext } from "react";
+import React, { Fragment, useEffect, useContext } from "react";
 import { Spinner } from "../layout/Spinner";
 import { Ingredients } from "../ingredients/Ingredients";
 import { Instructions } from "../instructions/Instructions";
@@ -16,7 +16,11 @@ export const Recipe = ({ match }) => {
   }, []);
 
   // typeof undefined => the fix the problem with first rendering and cannt map of undefined bug
-  if (loading || typeof recipe.extendedIngredients === "undefined") {
+  if (
+    loading ||
+    typeof recipe.extendedIngredients === "undefined" ||
+    typeof recipe.analyzedInstructions[0].steps === "undefined"
+  ) {
     return <Spinner />;
   } else {
     return (
@@ -70,9 +74,7 @@ export const Recipe = ({ match }) => {
           )}
         </div>
         <Ingredients ingredients={recipe.extendedIngredients} />
-        <div className="card">
-          <div dangerouslySetInnerHTML={{ __html: recipe.instructions }}></div>
-        </div>
+        <Instructions steps={recipe.analyzedInstructions[0].steps} />
       </Fragment>
     );
   }

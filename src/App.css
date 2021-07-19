@@ -32,8 +32,7 @@ a:hover {
   color: #666;
 }
 
-ul,
-ol {
+ul {
   list-style: none;
 }
 
@@ -122,9 +121,10 @@ img {
   margin: 0.5rem 1rem;
 }
 
-.list li {
+.list ul li {
   list-style: square;
 }
+
 
 /* Padding */
 .p {

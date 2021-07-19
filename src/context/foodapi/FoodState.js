@@ -24,13 +24,19 @@ const FoodState = (props) => {
   // Search recipes
   const searchRecipes = async (text) => {
     setLoading();
-    const res = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?query=${text}&number=1&apiKey=${foodApiKey}`
-    );
-    dispatch({
-      type: SEARCH_RECIPES,
-      payload: res.data.results,
-    });
+    try {
+      const res = await axios.get(
+        `https://api.spoonacular.com/recipes/complexSearch?query=${text}&number=1&apiKey=${foodApiKey}`
+      );
+      
+      dispatch({
+        type: SEARCH_RECIPES,
+        payload: res.data.results,
+      });
+
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // Get Recipe
@@ -46,6 +52,9 @@ const FoodState = (props) => {
     });
   };
 
+  // Clear Recipes
+  const clearRecipes = () => dispatch({ type: CLEAR_RECIPES });
+
   // Set Loading
   const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -57,6 +66,7 @@ const FoodState = (props) => {
         loading: state.loading,
         searchRecipes,
         getRecipe,
+        clearRecipes,
       }}
     >
       {props.children}
