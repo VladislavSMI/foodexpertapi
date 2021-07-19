@@ -3,6 +3,8 @@ import {
   SET_LOADING,
   CLEAR_RECIPES,
   GET_RECIPE,
+  SEARCH_FAIL,
+  CLEAR_ERRORS,
 } from "../types";
 
 const foodReducer = (state, action) => {
@@ -29,6 +31,19 @@ const foodReducer = (state, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case SEARCH_FAIL:
+      return {
+        ...state,
+        recipes: [],
+        recipe: {},
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;

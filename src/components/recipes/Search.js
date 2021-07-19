@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import FoodContext from "../../context/foodapi/foodContext";
 import AlertContext from "../../context/alert/alertContext";
 
@@ -6,13 +6,15 @@ export const Search = () => {
   const foodContext = useContext(FoodContext);
   const alertContext = useContext(AlertContext);
 
-  const { recipes, clearRecipes, searchRecipes } = foodContext;
+  const { recipes, clearRecipes, searchRecipes, error, clearErrors } =
+    foodContext;
   const { setAlert } = alertContext;
   const [text, setText] = useState("");
 
+  
   const onSubmit = (e) => {
     e.preventDefault();
-
+    
     if (text === "") {
       setAlert("Please search for some desired meal", "light");
     } else {
@@ -20,11 +22,14 @@ export const Search = () => {
       setText("");
     }
   };
-
-  // if (recipes.length == 0) {
-  //   setAlert("Please reenter your search", "light");
-  // }
-
+  
+  useEffect(() => {
+    if (error === "Invalid search, please search again") {
+      setAlert(error, "danger");
+      clearErrors();
+    }
+  });
+  
   const onChange = (e) => setText(e.target.value);
 
   return (

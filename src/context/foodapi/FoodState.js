@@ -8,6 +8,8 @@ import {
   SET_LOADING,
   CLEAR_RECIPES,
   GET_RECIPE,
+  SEARCH_FAIL,
+  CLEAR_ERRORS,
 } from "../types";
 
 let foodApiKey = process.env.REACT_APP_FOOD_API_KEY;
@@ -17,6 +19,7 @@ const FoodState = (props) => {
     recipes: [],
     recipe: {},
     loading: false,
+    error: null,
   };
 
   const [state, dispatch] = useReducer(FoodReducer, initialState);
@@ -24,16 +27,24 @@ const FoodState = (props) => {
   // Search recipes
   const searchRecipes = async (text) => {
     setLoading();
+
     try {
       const res = await axios.get(
         `https://api.spoonacular.com/recipes/complexSearch?query=${text}&number=1&apiKey=${foodApiKey}`
       );
-      
-      dispatch({
-        type: SEARCH_RECIPES,
-        payload: res.data.results,
-      });
+      console.log(res.data.results);
 
+      if (res.data.results.length === 0) {
+        dispatch({
+          type: SEARCH_FAIL,
+          payload: "Invalid search, please search again",
+        });
+      } else {
+        dispatch({
+          type: SEARCH_RECIPES,
+          payload: res.data.results,
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -58,15 +69,20 @@ const FoodState = (props) => {
   // Set Loading
   const setLoading = () => dispatch({ type: SET_LOADING });
 
+  // Clear Errors
+  const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
+
   return (
     <FoodContext.Provider
       value={{
         recipes: state.recipes,
         recipe: state.recipe,
         loading: state.loading,
+        error: state.error,
         searchRecipes,
         getRecipe,
         clearRecipes,
+        clearErrors,
       }}
     >
       {props.children}
