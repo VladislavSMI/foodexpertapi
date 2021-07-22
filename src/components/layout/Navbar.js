@@ -6,7 +6,9 @@ export const Navbar = ({ icon, title }) => {
   return (
     <nav className="navbar bg-primary">
       <h1>
-        <i className={icon} /> {title}
+        <Link to="/">
+          <i className={icon} /> {title}
+        </Link>
       </h1>
       <ul>
         <li>
@@ -21,7 +23,7 @@ export const Navbar = ({ icon, title }) => {
 };
 
 Navbar.defaultProps = {
-  title: "Food Expert",
+  title: "Kaver's Kitchen",
   icon: "fas fa-utensils",
 };
 

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useContext } from "react";
 import { Spinner } from "../layout/Spinner";
-import { Ingredients } from "../ingredients/Ingredients";
-import { Instructions } from "../instructions/Instructions";
+import { Instructions } from "./Instructions";
+import { Ingredients } from "./Ingredients";
 
 import { Link } from "react-router-dom";
 import FoodContext from "../../context/foodapi/foodContext";
@@ -15,12 +15,8 @@ export const Recipe = ({ match }) => {
     // eslint-disable-next-line
   }, []);
 
-  // typeof undefined => the fix the problem with first rendering and cannt map of undefined bug
-  if (
-    loading ||
-    typeof recipe.extendedIngredients === "undefined" ||
-    typeof recipe.analyzedInstructions[0].steps === "undefined"
-  ) {
+
+  if (loading) {
     return <Spinner />;
   } else {
     return (
@@ -28,7 +24,7 @@ export const Recipe = ({ match }) => {
         <Link to="/" className="btn btn-dark">
           Back To Search
         </Link>
-        <div className="card grid-2">
+        <div className="card grid-2 bg-primary">
           <div className="all-center">
             <img src={recipe.image} alt="" style={{ width: "250px" }} />
             <h1>{recipe.title}</h1>
@@ -38,7 +34,7 @@ export const Recipe = ({ match }) => {
             <div dangerouslySetInnerHTML={{ __html: recipe.summary }}></div>
           </div>
         </div>
-        <div className="card text-center">
+        <div className="card text-center bg-primary">
           {recipe.vegetarian ? (
             <div className="badge badge-success">Vegeterian</div>
           ) : (
@@ -73,8 +69,16 @@ export const Recipe = ({ match }) => {
             <div className="badge badge-danger">{recipe.spoonacularScore}</div>
           )}
         </div>
-        <Ingredients ingredients={recipe.extendedIngredients} />
-        <Instructions steps={recipe.analyzedInstructions[0].steps} />
+        <Ingredients
+          name={"Ingredients"}
+          ingredients={recipe.extendedIngredients}
+          listStyleType={"square"}
+        />
+        <Instructions
+          name={"Instructions"}
+          instructions={recipe.analyzedInstructions}
+          listStyleType={"decimal"}
+        />
       </Fragment>
     );
   }

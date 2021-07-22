@@ -30,7 +30,7 @@ const foodReducer = (state, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: true,
+        loading: action.payload,
       };
     case SEARCH_FAIL:
       return {

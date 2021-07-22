@@ -27,12 +27,10 @@ const FoodState = (props) => {
   // Search recipes
   const searchRecipes = async (text) => {
     setLoading();
-
     try {
       const res = await axios.get(
         `https://api.spoonacular.com/recipes/complexSearch?query=${text}&number=1&apiKey=${foodApiKey}`
       );
-      console.log(res.data.results);
 
       if (res.data.results.length === 0) {
         dispatch({
@@ -46,21 +44,31 @@ const FoodState = (props) => {
         });
       }
     } catch (err) {
-      console.log(err);
+      dispatch({
+        type: SEARCH_FAIL,
+        payload: err.response.data.message,
+      });
     }
   };
 
   // Get Recipe
   const getRecipe = async (id) => {
     setLoading();
-    const res = await axios.get(
-      `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${foodApiKey}`
-    );
+    try {
+      const res = await axios.get(
+        `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${foodApiKey}`
+      );
 
-    dispatch({
-      type: GET_RECIPE,
-      payload: res.data,
-    });
+      dispatch({
+        type: GET_RECIPE,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: SEARCH_FAIL,
+        payload: err.data.message,
+      });
+    }
   };
 
   // Clear Recipes

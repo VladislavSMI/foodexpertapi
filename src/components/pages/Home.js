@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Search } from "../recipes/Search";
 import { Recipes } from "../recipes/Recipes";
 
 export const Home = () => {
   return (
-    <Fragment>
+    <div>
       <Search />
       <Recipes />
-    </Fragment>
+    </div>
   );
 };

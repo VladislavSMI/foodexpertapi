@@ -2,7 +2,8 @@
 
 /* Global Styles */
 :root {
-  --primary-color: #056e5f;
+  --primary-color: #068874;
+  --primary-color-darker: #04574af1;
   --dark-color: #333333;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -19,17 +20,17 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #fff;
-  color: #333;
+  background-color: #333;
+  color: #fff;
 }
 
 a {
-  color: var(--primary-color);
+  color: var(--dark-color);
   text-decoration: none;
 }
 
 a:hover {
-  color: #666;
+  color: rgb(228, 217, 217);
 }
 
 ul {
@@ -112,8 +113,9 @@ img {
 /* Cards */
 .card {
   padding: 1rem;
-  border: #ccc 1px dotted;
+  border: var(--dark-color) 1px dotted;
   margin: 0.7rem 0;
+  opacity: 0.9;
 }
 
 /* List */
@@ -121,10 +123,13 @@ img {
   margin: 0.5rem 1rem;
 }
 
-.list ul li {
+.list .square li {
   list-style: square;
 }
 
+.list .decimal li {
+  list-style-type: decimal;
+}
 
 /* Padding */
 .p {
@@ -202,7 +207,7 @@ img {
   background: var(--light-color);
   color: #333;
   padding: 0.4rem 1.3rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   border: none;
   cursor: pointer;
   margin-right: 0.5rem;
@@ -251,6 +256,14 @@ img {
 .badge-primary,
 .alert-primary {
   background: var(--primary-color);
+  color: #fff;
+}
+
+.btn-primary-darker,
+.bg-primary-darker,
+.badge-primary-darker,
+.alert-primary-darker {
+  background: var(--primary-color-darker);
   color: #fff;
 }
 
@@ -335,6 +348,7 @@ textarea {
 input[type="submit"],
 button {
   font: inherit;
+  font-size: 1.2rem;
 }
 
 table th,
@@ -356,7 +370,8 @@ table th {
   z-index: 1;
   width: 100%;
   opacity: 0.9;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
+  border-bottom: var(--dark-color) 1px dotted;
 }
 
 .navbar ul {
@@ -370,11 +385,36 @@ table th {
 }
 
 .navbar a:hover {
-  color: var(--light-color);
+  color: var(--dark-color);
 }
 
 .navbar .welcome span {
   margin-right: 0.6rem;
+}
+
+/* Banner Image */
+.banner {
+  margin: 0;
+  padding: 0;
+  background: url("./components/layout/banner_img.jpg") no-repeat center/cover;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -2;
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 
 /* Mobile Styles */

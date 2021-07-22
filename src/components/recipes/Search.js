@@ -11,25 +11,25 @@ export const Search = () => {
   const { setAlert } = alertContext;
   const [text, setText] = useState("");
 
-  
   const onSubmit = (e) => {
     e.preventDefault();
-    
+
     if (text === "") {
-      setAlert("Please search for some desired meal", "light");
+      setAlert("Please type something in search field", "light");
     } else {
       searchRecipes(text);
       setText("");
     }
   };
-  
+
   useEffect(() => {
-    if (error === "Invalid search, please search again") {
+    if (error) {
       setAlert(error, "danger");
       clearErrors();
     }
-  });
-  
+    // eslint-disable-next-line
+  }, [error]);
+
   const onChange = (e) => setText(e.target.value);
 
   return (
@@ -38,14 +38,14 @@ export const Search = () => {
         <input
           type="text"
           name="text"
-          placeholder="Search User..."
+          placeholder="Search Recipe..."
           value={text}
           onChange={onChange}
         />
         <input
           type="submit"
           value="Search"
-          className="btn btn-dark btn-block"
+          className="btn btn-primary btn-block"
         />
       </form>
       {recipes.length > 0 && (
