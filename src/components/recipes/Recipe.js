@@ -45,19 +45,22 @@ export const Recipe = ({ match }) => {
   return (
     <Fragment>
       <div className="text-center">
-        <Link to="/" className="btn btn-dark">
+        <Link to="/" className="btn btn-dark m-1">
           Back To Search
         </Link>
         {!existInFavourite.length ? (
           <button
-            className="btn btn-light"
+            className="btn btn-light m-1"
             onClick={() => addFavourite({ id, image, title })}
           >
             Add To Favourite
           </button>
         ) : (
-          <button className="btn btn-dark" onClick={() => deleteFavourite(id)}>
-            DELETE FROM FAVOURITE
+          <button
+            className="btn btn-dark m-1"
+            onClick={() => deleteFavourite(id)}
+          >
+            Delete From Favourite
           </button>
         )}
       </div>
