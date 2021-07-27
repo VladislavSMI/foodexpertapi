@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Ingredients = ({ ingredients, name, listStyleType }) => {
-  console.log(ingredients);
 
   return (
     <div className="card bg-primary">

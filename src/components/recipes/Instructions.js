@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Instructions = ({ instructions, name, listStyleType }) => {
-  console.log(instructions);
+ 
 
   return (
     <div className="card bg-primary">

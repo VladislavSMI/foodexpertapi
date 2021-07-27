@@ -8,78 +8,114 @@ import FoodContext from "../../context/foodapi/foodContext";
 
 export const Recipe = ({ match }) => {
   const foodContext = useContext(FoodContext);
-  const { getRecipe, loading, recipe } = foodContext;
+  const {
+    getRecipe,
+    loading,
+    recipe,
+    favourite,
+    addFavourite,
+    deleteFavourite,
+  } = foodContext;
 
   useEffect(() => {
     getRecipe(match.params.id);
     // eslint-disable-next-line
   }, []);
 
+  const {
+    id,
+    image,
+    title,
+    readyInMinutes,
+    summary,
+    vegetarian,
+    vegan,
+    glutenFree,
+    dairyFree,
+    veryHealthy,
+    extendedIngredients,
+    analyzedInstructions,
+  } = recipe;
 
-  if (loading) {
-    return <Spinner />;
-  } else {
-    return (
-      <Fragment>
+  let existInFavourite = favourite.filter((fav) => fav.id === id);
+  console.log(id);
+
+  if (loading) return <Spinner />;
+
+  return (
+    <Fragment>
+      <div className="text-center">
         <Link to="/" className="btn btn-dark">
           Back To Search
         </Link>
-        <div className="card grid-2 bg-primary">
-          <div className="all-center">
-            <img src={recipe.image} alt="" style={{ width: "250px" }} />
-            <h1>{recipe.title}</h1>
-            <p>Time to prepare: {recipe.readyInMinutes} minutes</p>
-          </div>
-          <div>
-            <div dangerouslySetInnerHTML={{ __html: recipe.summary }}></div>
-          </div>
+        {!existInFavourite.length ? (
+          <button
+            className="btn btn-light"
+            onClick={() => addFavourite({ id, image, title })}
+          >
+            Add To Favourite
+          </button>
+        ) : (
+          <button className="btn btn-dark" onClick={() => deleteFavourite(id)}>
+            DELETE FROM FAVOURITE
+          </button>
+        )}
+      </div>
+      <div className="card grid-2 bg-primary">
+        <div className="all-center">
+          <img src={image} alt="" style={{ width: "250px" }} />
+          <h1>{title}</h1>
+          <p>Time to prepare: {readyInMinutes} minutes</p>
         </div>
-        <div className="card text-center bg-primary">
-          {recipe.vegetarian ? (
-            <div className="badge badge-success">Vegeterian</div>
-          ) : (
-            <div className="badge badge-danger">Vegeterian</div>
-          )}
-
-          {recipe.vegan ? (
-            <div className="badge badge-success">Vegan</div>
-          ) : (
-            <div className="badge badge-danger">Vegan</div>
-          )}
-
-          {recipe.glutenFree ? (
-            <div className="badge badge-success">Gluten-free</div>
-          ) : (
-            <div className="badge badge-danger">Gluten-free</div>
-          )}
-
-          {recipe.dairyFree ? (
-            <div className="badge badge-success">Dairy-free </div>
-          ) : (
-            <div className="badge badge-danger">Dairy-free </div>
-          )}
-          {recipe.veryHealthy ? (
-            <div className="badge badge-success">Very healthy</div>
-          ) : (
-            <div className="badge badge-danger">Very healthy</div>
-          )}
-          {recipe.spoonacularScore >= 75 ? (
-            <div className="badge badge-success">{recipe.spoonacularScore}</div>
-          ) : (
-            <div className="badge badge-danger">{recipe.spoonacularScore}</div>
-          )}
+        <div>
+          <div dangerouslySetInnerHTML={{ __html: summary }}></div>
         </div>
-        <Ingredients
-          name={"Ingredients"}
-          ingredients={recipe.extendedIngredients}
-          listStyleType={"square"}
-        />
-        <Instructions
-          name={"Instructions"}
-          instructions={recipe.analyzedInstructions}
-          listStyleType={"decimal"}
-        />
-      </Fragment>
-    );
-  }
+      </div>
+      <div className="card text-center">
+        {vegetarian ? (
+          <div className="badge badge-success">Vegeterian</div>
+        ) : (
+          <div className="badge badge-danger">Vegeterian</div>
+        )}
+
+        {vegan ? (
+          <div className="badge badge-success">Vegan</div>
+        ) : (
+          <div className="badge badge-danger">Vegan</div>
+        )}
+
+        {glutenFree ? (
+          <div className="badge badge-success">Gluten-free</div>
+        ) : (
+          <div className="badge badge-danger">Gluten-free</div>
+        )}
+
+        {dairyFree ? (
+          <div className="badge badge-success">Dairy-free </div>
+        ) : (
+          <div className="badge badge-danger">Dairy-free </div>
+        )}
+        {veryHealthy ? (
+          <div className="badge badge-success">Very healthy</div>
+        ) : (
+          <div className="badge badge-danger">Very healthy</div>
+        )}
+        {recipe.spoonacularScore >= 75 ? (
+          <div className="badge badge-success">{recipe.spoonacularScore}</div>
+        ) : (
+          <div className="badge badge-danger">{recipe.spoonacularScore}</div>
+        )}
+      </div>
+      <Ingredients
+        name={"Ingredients"}
+        ingredients={extendedIngredients}
+        listStyleType={"square"}
+      />
+      <Instructions
+        name={"Instructions"}
+        instructions={analyzedInstructions}
+        listStyleType={"decimal"}
+      />
+    </Fragment>
+  );
 };

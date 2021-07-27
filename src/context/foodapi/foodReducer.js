@@ -5,6 +5,8 @@ import {
   GET_RECIPE,
   SEARCH_FAIL,
   CLEAR_ERRORS,
+  ADD_FAVOURITE,
+  DELETE_FAVOURITE,
 } from "../types";
 
 const foodReducer = (state, action) => {
@@ -25,7 +27,18 @@ const foodReducer = (state, action) => {
       return {
         ...state,
         recipes: [],
+        recipe: {},
         loading: false,
+      };
+    case ADD_FAVOURITE:
+      return {
+        ...state,
+        favourite: [...state.favourite, action.payload],
+      };
+    case DELETE_FAVOURITE:
+      return {
+        ...state,
+        favourite: state.favourite.filter((fav) => fav.id !== action.payload),
       };
     case SET_LOADING:
       return {
@@ -35,8 +48,6 @@ const foodReducer = (state, action) => {
     case SEARCH_FAIL:
       return {
         ...state,
-        recipes: [],
-        recipe: {},
         loading: false,
         error: action.payload,
       };

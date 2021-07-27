@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import axios from "axios";
 import FoodContext from "./foodContext";
 import FoodReducer from "./foodReducer";
@@ -10,19 +10,34 @@ import {
   GET_RECIPE,
   SEARCH_FAIL,
   CLEAR_ERRORS,
+  ADD_FAVOURITE,
+  DELETE_FAVOURITE,
 } from "../types";
 
-let foodApiKey = process.env.REACT_APP_FOOD_API_KEY;
+let foodApiKey;
+
+if (process.env.NODE_ENV !== "production") {
+  foodApiKey = process.env.REACT_APP_FOOD_API_KEY;
+} else {
+  foodApiKey = process.env.FOOD_API_KEY;
+}
 
 const FoodState = (props) => {
   const initialState = {
     recipes: [],
     recipe: {},
+    favourite: JSON.parse(localStorage.getItem("favouriteRecipes"))
+      ? JSON.parse(localStorage.getItem("favouriteRecipes"))
+      : [],
     loading: false,
     error: null,
   };
 
   const [state, dispatch] = useReducer(FoodReducer, initialState);
+
+  useEffect(() => {
+    localStorage.setItem("favouriteRecipes", JSON.stringify(state.favourite));
+  }, [state.favourite]);
 
   // Search recipes
   const searchRecipes = async (text) => {
@@ -66,9 +81,28 @@ const FoodState = (props) => {
     } catch (err) {
       dispatch({
         type: SEARCH_FAIL,
-        payload: err.data.message,
+        payload: err.response.message,
       });
     }
+  };
+
+  // Add Favourite
+  const addFavourite = (favouriteRecipe) => {
+    const uniqueFavouriteRecipe = state.favourite.filter(
+      (fav) => fav.id === favouriteRecipe.id
+    );
+
+    if (!uniqueFavouriteRecipe.length) {
+      dispatch({
+        type: ADD_FAVOURITE,
+        payload: favouriteRecipe,
+      });
+    }
+  };
+
+  // Delete Favourite
+  const deleteFavourite = (idRecipe) => {
+    dispatch({ type: DELETE_FAVOURITE, payload: idRecipe });
   };
 
   // Clear Recipes
@@ -85,10 +119,13 @@ const FoodState = (props) => {
       value={{
         recipes: state.recipes,
         recipe: state.recipe,
+        favourite: state.favourite,
         loading: state.loading,
         error: state.error,
         searchRecipes,
         getRecipe,
+        addFavourite,
+        deleteFavourite,
         clearRecipes,
         clearErrors,
       }}
