@@ -50,16 +50,13 @@ export const Recipe = ({ match }) => {
         </Link>
         {!existInFavourite.length ? (
           <button
-            className="btn btn-light m-1"
+            className="btn btn-light"
             onClick={() => addFavourite({ id, image, title })}
           >
             Add To Favourite
           </button>
         ) : (
-          <button
-            className="btn btn-dark m-1"
-            onClick={() => deleteFavourite(id)}
-          >
+          <button className="btn btn-dark" onClick={() => deleteFavourite(id)}>
             Delete From Favourite
           </button>
         )}
