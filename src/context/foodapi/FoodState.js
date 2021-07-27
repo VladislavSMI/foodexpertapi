@@ -16,6 +16,7 @@ import {
 
 let foodApiKey;
 
+
 if (process.env.NODE_ENV !== "production") {
   foodApiKey = process.env.REACT_APP_FOOD_API_KEY_LOCAL;
 } else {
