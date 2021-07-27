@@ -44,7 +44,7 @@ const FoodState = (props) => {
     setLoading();
     try {
       const res = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${text}&number=1&apiKey=${foodApiKey}`
+        `https://api.spoonacular.com/recipes/complexSearch?query=${text}&number=3&apiKey=${foodApiKey}`
       );
 
       if (res.data.results.length === 0) {
