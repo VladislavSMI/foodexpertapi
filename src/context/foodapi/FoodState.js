@@ -17,9 +17,9 @@ import {
 let foodApiKey;
 
 if (process.env.NODE_ENV !== "production") {
-  foodApiKey = process.env.FOOD_API_KEY;
+  foodApiKey = process.env.REACT_APP_FOOD_API_KEY_LOCAL;
 } else {
-  foodApiKey = process.env.REACT_APP_FOOD_API_KEY;
+  foodApiKey = process.env.REACT_APP_FOOD_API_KEY_PRODUCTION;
 }
 
 const FoodState = (props) => {
