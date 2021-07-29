@@ -401,15 +401,16 @@ table th {
 /* Banner Image */
 .banner {
   margin: 0;
-  padding: 0;
+  padding: 8rem 0;
   background: url("./components/layout/banner_img.jpg") no-repeat center/cover;
+  background-repeat: repeat-x;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
   overflow: hidden;
-  z-index: -2;
+  z-index: -100;
 }
 
 .banner::after {

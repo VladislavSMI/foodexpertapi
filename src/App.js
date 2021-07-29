@@ -5,7 +5,6 @@ import FoodState from "./context/foodapi/FoodState";
 import AlertState from "./context/alert/AlertState";
 
 import { Navbar } from "./components/layout/Navbar";
-import { Banner } from "./components/layout/Banner";
 import { Home } from "./components/pages/Home";
 import { About } from "./components/pages/About";
 import { Favourite } from "./components/pages/Favourite";
@@ -22,16 +21,17 @@ export const App = () => {
         <Router>
           <div className="App">
             <Navbar />
-            <Banner />
-            <div className="container">
-              <Alerts />
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/recipe/:id" component={Recipe} />
-                <Route extact path="/favourite" component={Favourite} />
-                <Route component={NotFound} />
-              </Switch>
+            <div className="banner">
+              <div className="container">
+                <Alerts />
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/about" component={About} />
+                  <Route exact path="/recipe/:id" component={Recipe} />
+                  <Route extact path="/favourite" component={Favourite} />
+                  <Route component={NotFound} />
+                </Switch>
+              </div>
             </div>
           </div>
         </Router>
