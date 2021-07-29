@@ -45,7 +45,7 @@ export const Recipe = ({ match }) => {
   return (
     <Fragment>
       <div className="text-center">
-        <Link to="/" className="btn btn-dark m-1">
+        <Link to="/" className="btn btn-dark my-1">
           Back To Search
         </Link>
         {!existInFavourite.length ? (

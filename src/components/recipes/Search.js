@@ -22,6 +22,7 @@ export const Search = () => {
     }
   };
 
+
   useEffect(() => {
     if (error) {
       setAlert(error, "danger");

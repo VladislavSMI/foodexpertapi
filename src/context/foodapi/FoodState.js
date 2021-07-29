@@ -47,7 +47,6 @@ const FoodState = (props) => {
       const res = await axios.get(
         `https://api.spoonacular.com/recipes/complexSearch?query=${text}&number=3&apiKey=${foodApiKey}`
       );
-
       if (res.data.results.length === 0) {
         dispatch({
           type: SEARCH_FAIL,
