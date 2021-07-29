@@ -28,7 +28,6 @@ const foodReducer = (state, action) => {
         ...state,
         recipes: [],
         recipe: {},
-        loading: false,
       };
     case ADD_FAVOURITE:
       return {
@@ -43,7 +42,7 @@ const foodReducer = (state, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: action.payload,
+        loading: true,
       };
     case SEARCH_FAIL:
       return {

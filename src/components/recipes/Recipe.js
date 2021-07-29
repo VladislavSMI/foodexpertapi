@@ -38,7 +38,6 @@ export const Recipe = ({ match }) => {
   } = recipe;
 
   let existInFavourite = favourite.filter((fav) => fav.id === id);
-  console.log(id);
 
   if (loading) return <Spinner />;
 

@@ -403,7 +403,7 @@ table th {
   margin: 0;
   padding: 8rem 0;
   background: url("./components/layout/banner_img.jpg") no-repeat center/cover;
-  background-repeat: repeat-y;
+  background-repeat: repeat-;
   width: 100%;
   min-height: 100vh;
   position: absolute;
