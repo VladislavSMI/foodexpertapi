@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Instructions = ({ instructions, name, listStyleType }) => {
- 
-
   return (
     <div className="card bg-primary">
       <h2>{name}</h2>
@@ -18,9 +16,6 @@ export const Instructions = ({ instructions, name, listStyleType }) => {
   );
 };
 
-Instructions.defaultProps = {
-  instructions: [],
-};
 
 Instructions.propTypes = {
   instructions: PropTypes.array.isRequired,

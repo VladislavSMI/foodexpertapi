@@ -40,7 +40,7 @@ export const Recipe = ({ match }) => {
   let existInFavourite = favourite.filter((fav) => fav.id === id);
 
   if (loading) return <Spinner />;
-
+  
   return (
     <Fragment>
       <div className="text-center">

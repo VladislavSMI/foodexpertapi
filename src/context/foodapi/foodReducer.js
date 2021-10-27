@@ -1,6 +1,5 @@
 import {
   SEARCH_RECIPES,
-  SET_LOADING,
   CLEAR_RECIPES,
   GET_RECIPE,
   SEARCH_FAIL,
@@ -39,11 +38,7 @@ const foodReducer = (state, action) => {
         ...state,
         favourite: state.favourite.filter((fav) => fav.id !== action.payload),
       };
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: true,
-      };
+
     case SEARCH_FAIL:
       return {
         ...state,

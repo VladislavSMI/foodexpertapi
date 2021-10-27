@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Ingredients = ({ ingredients, name, listStyleType }) => {
-
   return (
     <div className="card bg-primary">
       <h2>{name}</h2>
@@ -17,9 +16,9 @@ export const Ingredients = ({ ingredients, name, listStyleType }) => {
   );
 };
 
-Ingredients.defaultProps = {
-  ingredients: [],
-};
+// Ingredients.defaultProps = {
+//   ingredients: [],
+// };
 
 Ingredients.propTypes = {
   ingredients: PropTypes.array.isRequired,

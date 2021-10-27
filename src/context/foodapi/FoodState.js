@@ -5,7 +5,6 @@ import FoodReducer from "./foodReducer";
 
 import {
   SEARCH_RECIPES,
-  SET_LOADING,
   CLEAR_RECIPES,
   GET_RECIPE,
   SEARCH_FAIL,
@@ -29,7 +28,7 @@ const FoodState = (props) => {
     favourite: JSON.parse(localStorage.getItem("favouriteRecipes"))
       ? JSON.parse(localStorage.getItem("favouriteRecipes"))
       : [],
-    loading: false,
+    loading: true,
     error: null,
   };
 
@@ -41,7 +40,6 @@ const FoodState = (props) => {
 
   // Search recipes
   const searchRecipes = async (text) => {
-    setLoading();
     try {
       const res = await axios.get(
         `https://api.spoonacular.com/recipes/complexSearch?query=${text}&number=3&apiKey=${foodApiKey}`
@@ -67,7 +65,6 @@ const FoodState = (props) => {
 
   // Get Recipe
   const getRecipe = async (id) => {
-    setLoading();
     try {
       const res = await axios.get(
         `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${foodApiKey}`
@@ -106,9 +103,6 @@ const FoodState = (props) => {
 
   // Clear Recipes
   const clearRecipes = () => dispatch({ type: CLEAR_RECIPES });
-
-  // Set Loading
-  const setLoading = () => dispatch({ type: SET_LOADING });
 
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
