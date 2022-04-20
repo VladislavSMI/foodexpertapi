@@ -16,9 +16,9 @@ export const Ingredients = ({ ingredients, name, listStyleType }) => {
   );
 };
 
-// Ingredients.defaultProps = {
-//   ingredients: [],
-// };
+Ingredients.defaultProps = {
+  ingredients: [],
+};
 
 Ingredients.propTypes = {
   ingredients: PropTypes.array.isRequired,
