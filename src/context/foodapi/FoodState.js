@@ -11,6 +11,7 @@ import {
   CLEAR_ERRORS,
   ADD_FAVOURITE,
   DELETE_FAVOURITE,
+  SET_LOADING,
 } from "../types";
 
 let foodApiKey;
@@ -28,7 +29,7 @@ const FoodState = (props) => {
     favourite: JSON.parse(localStorage.getItem("favouriteRecipes"))
       ? JSON.parse(localStorage.getItem("favouriteRecipes"))
       : [],
-    loading: true,
+    loading: false,
     error: null,
   };
 
@@ -40,6 +41,10 @@ const FoodState = (props) => {
 
   // Search recipes
   const searchRecipes = async (text) => {
+    dispatch({
+      type: SET_LOADING,
+      payload: true,
+    })
     try {
       const res = await axios.get(
         `https://api.spoonacular.com/recipes/complexSearch?query=${text}&number=3&apiKey=${foodApiKey}`

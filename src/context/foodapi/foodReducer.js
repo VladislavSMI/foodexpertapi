@@ -6,10 +6,17 @@ import {
   CLEAR_ERRORS,
   ADD_FAVOURITE,
   DELETE_FAVOURITE,
+  SET_LOADING,
 } from "../types";
 
 const foodReducer = (state, action) => {
   switch (action.type) {
+    case SET_LOADING: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
     case SEARCH_RECIPES:
       return {
         ...state,

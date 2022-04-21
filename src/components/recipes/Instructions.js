@@ -16,6 +16,9 @@ export const Instructions = ({ instructions, name, listStyleType }) => {
   );
 };
 
+Instructions.defaultProps = {
+  instructions: [],
+};
 
 Instructions.propTypes = {
   instructions: PropTypes.array.isRequired,
