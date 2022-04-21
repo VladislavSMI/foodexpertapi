@@ -44,7 +44,7 @@ const FoodState = (props) => {
     dispatch({
       type: SET_LOADING,
       payload: true,
-    })
+    });
     try {
       const res = await axios.get(
         `https://api.spoonacular.com/recipes/complexSearch?query=${text}&number=3&apiKey=${foodApiKey}`
@@ -70,6 +70,10 @@ const FoodState = (props) => {
 
   // Get Recipe
   const getRecipe = async (id) => {
+    dispatch({
+      type: SET_LOADING,
+      payload: true,
+    });
     try {
       const res = await axios.get(
         `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${foodApiKey}`
